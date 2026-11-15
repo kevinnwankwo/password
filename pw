@@ -1,0 +1,31 @@
+"""
+A code that generates N passwords of M characters. The number of characters should be the same for each password.
+"""
+
+import secrets
+import string
+
+def generate_passwords(num_passwords, length):
+    # Combine uppercase letters, lowercase letters, digits, and punctuation
+    characters = string.ascii_letters + string.digits + string.punctuation
+    
+    print(f"\n--- Generating {num_passwords} Passwords ({length} characters each) ---\n")
+    
+    for i in range(1, num_passwords + 1):
+        # Pick 'length' random characters and join them into a single string
+        password = ''.join(secrets.choice(characters) for _ in range(length))
+        print(f"Password {i}: {password}")
+
+# Main execution with input validation
+while True:
+    try:
+        n = int(input("Enter the number of passwords to generate: ").strip())
+        m = int(input("Enter the character length for each password: ").strip())
+        
+        if n > 0 and m > 0:
+            generate_passwords(n, m)
+            break
+        else:
+            print("Both N and M must be positive numbers greater than 0. Try again.\n")
+    except ValueError:
+        print("Invalid input! Please enter whole numbers only.\n")
